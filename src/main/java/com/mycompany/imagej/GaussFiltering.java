@@ -24,9 +24,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This example illustrates how to create a minimal ImageJ plugin.
+ * This example illustrates how to create an ImageJ {@link Command} plugin.
+ * <p>
+ * The code here is a simple Gaussian blur using ImageJ Ops.
+ * </p>
+ * <p>
+ * You should replace the parameter fields with your own inputs and outputs,
+ * and replace the {@link run} method implementation with your own logic.
+ * </p>
  */
-
 @Plugin(type = Command.class, menuPath = "Plugins>Gauss Filtering")
 public class GaussFiltering<T extends RealType<T>> implements Command {
     //
