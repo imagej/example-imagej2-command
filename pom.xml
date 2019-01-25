@@ -5,17 +5,9 @@
 		http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.scijava</groupId>
-		<artifactId>pom-scijava</artifactId>
-		<version>22.3.0</version>
-		<relativePath />
-	</parent>
-
 	<groupId>com.mycompany</groupId>
 	<artifactId>GaussFiltering</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-
 	<name>Gauss Filtering</name>
 	<description>A Maven project implementing an ImageJ command.</description>
 	<url>http://mycompany.com/imagej/gauss-filtering/</url>
@@ -30,9 +22,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
 	<developers>
-		<!-- See https://imagej.net/Team -->
 		<developer>
 			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
@@ -52,22 +42,23 @@
 		<contributor>
 			<name>Yili Zhao</name>
 			<url>http://imagej.net/User:Panovr</url>
-			<roles><role>founder</role></roles>
-			<properties><id>panovr</id></properties>
+			<roles>
+				<role>founder</role>
+			</roles>
+			<properties>
+				<id>panovr</id>
+			</properties>
 		</contributor>
 	</contributors>
-
 	<mailingLists>
 		<mailingList>
 			<name>Image.sc Forum</name>
 			<archive>https://forum.image.sc/</archive>
 		</mailingList>
 	</mailingLists>
-
 	<scm>
 		<connection>scm:git:git://github.com/imagej/example-imagej-command</connection>
 		<developerConnection>scm:git:git@github.com:imagej/example-imagej-command</developerConnection>
-		<tag>HEAD</tag>
 		<url>https://github.com/imagej/example-imagej-command</url>
 	</scm>
 	<issueManagement>
@@ -79,23 +70,745 @@
 	</ciManagement>
 
 	<properties>
-		<package-name>com.mycompany.imagej</package-name>
-		<main-class>com.mycompany.imagej.GaussFiltering</main-class>
-		<license.licenseName>bsd_2</license.licenseName>
 		<license.copyrightOwners>My Company, Inc.</license.copyrightOwners>
+		<license.licenseName>bsd_2</license.licenseName>
 	</properties>
-
+	<dependencies>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-common</artifactId>
+			<version>0.28.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-ops</artifactId>
+			<version>0.43.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<repositories>
 		<repository>
 			<id>imagej.public</id>
 			<url>http://maven.imagej.net/content/groups/public</url>
 		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
 	</repositories>
 
-	<dependencies>
-		<dependency>
-			<groupId>net.imagej</groupId>
-			<artifactId>imagej</artifactId>
-		</dependency>
-	</dependencies>
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+	<build>
+		<sourceDirectory>E:\code\imagej\example-imagej-command\src\main\java</sourceDirectory>
+		<scriptSourceDirectory>E:\code\imagej\example-imagej-command\src\main\scripts</scriptSourceDirectory>
+		<testSourceDirectory>E:\code\imagej\example-imagej-command\src\test\java</testSourceDirectory>
+		<outputDirectory>E:\code\imagej\example-imagej-command\target\classes</outputDirectory>
+		<testOutputDirectory>E:\code\imagej\example-imagej-command\target\test-classes</testOutputDirectory>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>1.0</version>
+			</extension>
+		</extensions>
+		<defaultGoal>install</defaultGoal>
+		<resources>
+			<resource>
+				<directory>E:\code\imagej\example-imagej-command\src\main\resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>E:\code\imagej\example-imagej-command\src\test\resources</directory>
+			</testResource>
+		</testResources>
+		<directory>E:\code\imagej\example-imagej-command\target</directory>
+		<finalName>GaussFiltering-0.1.0-SNAPSHOT</finalName>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+					<execution>
+						<id>enforce-rules</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.3.9</version>
+								</requireMavenVersion>
+								<requirePluginVersions>
+									<message>Plugins need to be versioned!</message>
+								</requirePluginVersions>
+								<requireJavaVersion>
+									<version>[1.8.0-101,1.8.9999]</version>
+								</requireJavaVersion>
+								<banDuplicateClasses>
+									<message>No Duplicate Classes Allowed!
+										- For duplicate transitive dependencies, add dependency
+										exclusions.
+										- For duplications between direct dependencies, resolve or add
+										ignored classes to this rule's configuration.</message>
+									<findAllDuplicates>true</findAllDuplicates>
+									<ignoreClasses>org.apache.hadoop.yarn.*.package-info,org.apache.spark.unused.UnusedStubClass,org.hibernate.stat.ConcurrentStatisticsImpl,org.junit.runner.Runner</ignoreClasses>
+								</banDuplicateClasses>
+								<requireDeveloperRoles>
+									<validRoles>founder,lead,developer,debugger,reviewer,support,maintainer</validRoles>
+								</requireDeveloperRoles>
+								<requireContributorRoles>
+									<validRoles>founder,lead,developer,debugger,reviewer,support,maintainer</validRoles>
+								</requireContributorRoles>
+								<enforceBytecodeVersion>
+									<maxJdkVersion>1.8</maxJdkVersion>
+									<excludes>
+										<exclude>com.headius:invokebinder</exclude>
+										<exclude>com.sun:tools</exclude>
+									</excludes>
+									<ignoreClasses>
+										<ignoreClass>module-info</ignoreClass>
+									</ignoreClasses>
+									<ignoredScopes>
+										<ignoredScope>test</ignoredScope>
+									</ignoredScopes>
+								</enforceBytecodeVersion>
+								<banCircularDependencies />
+								<requireElements
+									implementation="org.scijava.maven.plugin.enforcer.RequireElements">
+									<elements>
+										<element>name</element>
+										<element>description</element>
+										<element>url</element>
+										<element>inceptionYear</element>
+										<element>organization</element>
+										<element>licenses</element>
+										<element>developers</element>
+										<element>contributors</element>
+										<element>mailingLists</element>
+										<element>scm</element>
+										<element>issueManagement</element>
+										<element>ciManagement</element>
+										<element>properties//license.licenseName</element>
+										<element>properties//license.copyrightOwners</element>
+									</elements>
+								</requireElements>
+								<requireReproducibleBuilds
+									implementation="org.scijava.maven.plugin.enforcer.RequireReproducibleBuilds">
+									<groupIds>org.scijava,net.imagej,net.imglib2,io.scif,sc.fiji</groupIds>
+								</requireReproducibleBuilds>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>extra-enforcer-rules</artifactId>
+						<version>1.1</version>
+						<scope>compile</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.scijava</groupId>
+						<artifactId>scijava-maven-plugin</artifactId>
+						<version>1.1.0</version>
+						<scope>compile</scope>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<rules>
+						<requireMavenVersion>
+							<version>3.3.9</version>
+						</requireMavenVersion>
+						<requirePluginVersions>
+							<message>Plugins need to be versioned!</message>
+						</requirePluginVersions>
+						<requireJavaVersion>
+							<version>[1.8.0-101,1.8.9999]</version>
+						</requireJavaVersion>
+						<banDuplicateClasses>
+							<message>No Duplicate Classes Allowed!
+								- For duplicate transitive dependencies, add dependency
+								exclusions.
+								- For duplications between direct dependencies, resolve or add
+								ignored classes to this rule's configuration.</message>
+							<findAllDuplicates>true</findAllDuplicates>
+							<ignoreClasses>org.apache.hadoop.yarn.*.package-info,org.apache.spark.unused.UnusedStubClass,org.hibernate.stat.ConcurrentStatisticsImpl,org.junit.runner.Runner</ignoreClasses>
+						</banDuplicateClasses>
+						<requireDeveloperRoles>
+							<validRoles>founder,lead,developer,debugger,reviewer,support,maintainer</validRoles>
+						</requireDeveloperRoles>
+						<requireContributorRoles>
+							<validRoles>founder,lead,developer,debugger,reviewer,support,maintainer</validRoles>
+						</requireContributorRoles>
+						<enforceBytecodeVersion>
+							<maxJdkVersion>1.8</maxJdkVersion>
+							<excludes>
+								<exclude>com.headius:invokebinder</exclude>
+								<exclude>com.sun:tools</exclude>
+							</excludes>
+							<ignoreClasses>
+								<ignoreClass>module-info</ignoreClass>
+							</ignoreClasses>
+							<ignoredScopes>
+								<ignoredScope>test</ignoredScope>
+							</ignoredScopes>
+						</enforceBytecodeVersion>
+						<banCircularDependencies />
+						<requireElements
+							implementation="org.scijava.maven.plugin.enforcer.RequireElements">
+							<elements>
+								<element>name</element>
+								<element>description</element>
+								<element>url</element>
+								<element>inceptionYear</element>
+								<element>organization</element>
+								<element>licenses</element>
+								<element>developers</element>
+								<element>contributors</element>
+								<element>mailingLists</element>
+								<element>scm</element>
+								<element>issueManagement</element>
+								<element>ciManagement</element>
+								<element>properties//license.licenseName</element>
+								<element>properties//license.copyrightOwners</element>
+							</elements>
+						</requireElements>
+						<requireReproducibleBuilds
+							implementation="org.scijava.maven.plugin.enforcer.RequireReproducibleBuilds">
+							<groupIds>org.scijava,net.imagej,net.imglib2,io.scif,sc.fiji</groupIds>
+						</requireReproducibleBuilds>
+					</rules>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.21.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.21.0</version>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<argLine>${argLine} -Xms512m -Xmx512m
+								-Dapple.awt.UIElement="true"</argLine>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<argLine>${argLine} -Xms512m -Xmx512m -Dapple.awt.UIElement="true"</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>sanitize-version</id>
+						<goals>
+							<goal>regex-property</goal>
+						</goals>
+						<configuration>
+							<name>sanitizedVersion</name>
+							<value>0.1.0-SNAPSHOT</value>
+							<regex>^([0-9]+)\.([0-9]+)\.([0-9]+).*$</regex>
+							<replacement>$1.$2.$3</replacement>
+							<failIfNoMatch>false</failIfNoMatch>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+						<configuration>
+							<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+							<revisionOnScmFailure>UNKNOWN</revisionOnScmFailure>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+					<revisionOnScmFailure>UNKNOWN</revisionOnScmFailure>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.fusesource.mvnplugins</groupId>
+				<artifactId>maven-graph-plugin</artifactId>
+				<version>1.39</version>
+				<configuration>
+					<hideScopes>provided,runtime,system,test</hideScopes>
+					<hideTransitive>true</hideTransitive>
+					<label>Dependency Graph for Gauss Filtering</label>
+					<target>E:\code\imagej\example-imagej-command\target/dependency-graph.dot</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.zenjava</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>8.8.3</version>
+				<configuration>
+					<appName>Gauss Filtering</appName>
+					<identifier>Gauss Filtering</identifier>
+					<jfxMainAppJarName>Gauss Filtering.jar</jfxMainAppJarName>
+					<mainClass>com.mycompany.imagej.GaussFiltering</mainClass>
+					<nativeReleaseVersion>${sanitizedVersion}</nativeReleaseVersion>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<version>3.5.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.scijava</groupId>
+				<artifactId>scijava-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<id>set-rootdir</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>set-rootdir</goal>
+						</goals>
+						<configuration>
+							<deleteOtherVersionsPolicy>older</deleteOtherVersionsPolicy>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-jars</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-jars</goal>
+						</goals>
+						<configuration>
+							<deleteOtherVersionsPolicy>older</deleteOtherVersionsPolicy>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<deleteOtherVersionsPolicy>older</deleteOtherVersionsPolicy>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>default-clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>default-testResources</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testResources</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+									<mainClass>com.mycompany.imagej.GaussFiltering</mainClass>
+									<packageName>com.mycompany.imagej</packageName>
+								</manifest>
+								<manifestEntries>
+									<Premain-Class />
+									<Implementation-Build>${buildNumber}</Implementation-Build>
+									<Implementation-Date>2019-01-25T10:16:06+0000</Implementation-Date>
+									<Automatic-Module-Name>com.mycompany.imagej</Automatic-Module-Name>
+								</manifestEntries>
+							</archive>
+							<skipIfEmpty>true</skipIfEmpty>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+									<mainClass>com.mycompany.imagej.GaussFiltering</mainClass>
+									<packageName>com.mycompany.imagej</packageName>
+								</manifest>
+								<manifestEntries>
+									<Premain-Class />
+									<Implementation-Build>${buildNumber}</Implementation-Build>
+									<Implementation-Date>2019-01-25T10:16:06+0000</Implementation-Date>
+									<Automatic-Module-Name>com.mycompany.imagej</Automatic-Module-Name>
+								</manifestEntries>
+							</archive>
+							<skipIfEmpty>true</skipIfEmpty>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<mainClass>com.mycompany.imagej.GaussFiltering</mainClass>
+							<packageName>com.mycompany.imagej</packageName>
+						</manifest>
+						<manifestEntries>
+							<Premain-Class />
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+							<Implementation-Date>2019-01-25T10:16:06+0000</Implementation-Date>
+							<Automatic-Module-Name>com.mycompany.imagej</Automatic-Module-Name>
+						</manifestEntries>
+					</archive>
+					<skipIfEmpty>true</skipIfEmpty>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+							<testSource>1.8</testSource>
+							<testTarget>1.8</testTarget>
+							<useIncrementalCompilation>false</useIncrementalCompilation>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+							<testSource>1.8</testSource>
+							<testTarget>1.8</testTarget>
+							<useIncrementalCompilation>false</useIncrementalCompilation>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<testSource>1.8</testSource>
+					<testTarget>1.8</testTarget>
+					<useIncrementalCompilation>false</useIncrementalCompilation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+				<executions>
+					<execution>
+						<id>default-install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
+				<executions>
+					<execution>
+						<id>default-site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>E:\code\imagej\example-imagej-command\target\site</outputDirectory>
+							<reportPlugins>
+								<reportPlugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-javadoc-plugin</artifactId>
+									<version>3.0.1</version>
+									<configuration>
+										<maxmemory>1024m</maxmemory>
+										<use>false</use>
+										<links>
+											<link>https://javadoc.scijava.org/Java/</link>
+											<link>https://javadoc.scijava.org/SciJava/</link>
+											<link>https://javadoc.scijava.org/Alida/</link>
+											<link>https://javadoc.scijava.org/Bio-Formats/</link>
+											<link>https://javadoc.scijava.org/Fiji/</link>
+											<link>https://javadoc.scijava.org/Icy/</link>
+											<link>https://javadoc.scijava.org/ImageJ/</link>
+											<link>https://javadoc.scijava.org/ImageJ1/</link>
+											<link>https://javadoc.scijava.org/ImgLib2/</link>
+											<link>https://javadoc.scijava.org/Java3D/</link>
+											<link>https://javadoc.scijava.org/KNIME/</link>
+											<link>https://javadoc.scijava.org/LOCI/</link>
+											<link>https://javadoc.scijava.org/MiToBo/</link>
+											<link>https://javadoc.scijava.org/Micro-Manager-Core/</link>
+											<link>https://javadoc.scijava.org/Micro-Manager-Studio/</link>
+											<link>https://javadoc.scijava.org/MorphoLibJ/</link>
+											<link>https://javadoc.scijava.org/OMERO/</link>
+											<link>https://javadoc.scijava.org/SCIFIO/</link>
+											<link>https://javadoc.scijava.org/SLIM-Curve/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-IO/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-Lang/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-Math/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-Text/</link>
+											<link>https://javadoc.scijava.org/BoneJ/</link>
+											<link>https://javadoc.scijava.org/Eclipse/</link>
+											<link>https://javadoc.scijava.org/Guava/</link>
+											<link>https://javadoc.scijava.org/JAMA/</link>
+											<link>https://javadoc.scijava.org/JFreeChart/</link>
+											<link>https://javadoc.scijava.org/JGraphT/</link>
+											<link>https://javadoc.scijava.org/JHotDraw/</link>
+											<link>https://javadoc.scijava.org/JOML/</link>
+											<link>https://javadoc.scijava.org/Javassist/</link>
+											<link>https://javadoc.scijava.org/MigLayout/</link>
+											<link>https://javadoc.scijava.org/NetBeans/</link>
+											<link>https://javadoc.scijava.org/Pivot/</link>
+											<link>https://javadoc.scijava.org/VisAD/</link>
+											<link>https://javadoc.scijava.org/Weka/</link>
+											<link>https://javadoc.scijava.org/ojAlgo/</link>
+										</links>
+									</configuration>
+								</reportPlugin>
+								<reportPlugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-project-info-reports-plugin</artifactId>
+								</reportPlugin>
+							</reportPlugins>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-deploy</id>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>E:\code\imagej\example-imagej-command\target\site</outputDirectory>
+							<reportPlugins>
+								<reportPlugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-javadoc-plugin</artifactId>
+									<version>3.0.1</version>
+									<configuration>
+										<maxmemory>1024m</maxmemory>
+										<use>false</use>
+										<links>
+											<link>https://javadoc.scijava.org/Java/</link>
+											<link>https://javadoc.scijava.org/SciJava/</link>
+											<link>https://javadoc.scijava.org/Alida/</link>
+											<link>https://javadoc.scijava.org/Bio-Formats/</link>
+											<link>https://javadoc.scijava.org/Fiji/</link>
+											<link>https://javadoc.scijava.org/Icy/</link>
+											<link>https://javadoc.scijava.org/ImageJ/</link>
+											<link>https://javadoc.scijava.org/ImageJ1/</link>
+											<link>https://javadoc.scijava.org/ImgLib2/</link>
+											<link>https://javadoc.scijava.org/Java3D/</link>
+											<link>https://javadoc.scijava.org/KNIME/</link>
+											<link>https://javadoc.scijava.org/LOCI/</link>
+											<link>https://javadoc.scijava.org/MiToBo/</link>
+											<link>https://javadoc.scijava.org/Micro-Manager-Core/</link>
+											<link>https://javadoc.scijava.org/Micro-Manager-Studio/</link>
+											<link>https://javadoc.scijava.org/MorphoLibJ/</link>
+											<link>https://javadoc.scijava.org/OMERO/</link>
+											<link>https://javadoc.scijava.org/SCIFIO/</link>
+											<link>https://javadoc.scijava.org/SLIM-Curve/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-IO/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-Lang/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-Math/</link>
+											<link>https://javadoc.scijava.org/Apache-Commons-Text/</link>
+											<link>https://javadoc.scijava.org/BoneJ/</link>
+											<link>https://javadoc.scijava.org/Eclipse/</link>
+											<link>https://javadoc.scijava.org/Guava/</link>
+											<link>https://javadoc.scijava.org/JAMA/</link>
+											<link>https://javadoc.scijava.org/JFreeChart/</link>
+											<link>https://javadoc.scijava.org/JGraphT/</link>
+											<link>https://javadoc.scijava.org/JHotDraw/</link>
+											<link>https://javadoc.scijava.org/JOML/</link>
+											<link>https://javadoc.scijava.org/Javassist/</link>
+											<link>https://javadoc.scijava.org/MigLayout/</link>
+											<link>https://javadoc.scijava.org/NetBeans/</link>
+											<link>https://javadoc.scijava.org/Pivot/</link>
+											<link>https://javadoc.scijava.org/VisAD/</link>
+											<link>https://javadoc.scijava.org/Weka/</link>
+											<link>https://javadoc.scijava.org/ojAlgo/</link>
+										</links>
+									</configuration>
+								</reportPlugin>
+								<reportPlugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-project-info-reports-plugin</artifactId>
+								</reportPlugin>
+							</reportPlugins>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<outputDirectory>E:\code\imagej\example-imagej-command\target\site</outputDirectory>
+					<reportPlugins>
+						<reportPlugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>3.0.1</version>
+							<configuration>
+								<maxmemory>1024m</maxmemory>
+								<use>false</use>
+								<links>
+									<link>https://javadoc.scijava.org/Java/</link>
+									<link>https://javadoc.scijava.org/SciJava/</link>
+									<link>https://javadoc.scijava.org/ImageJ/</link>
+									<link>https://javadoc.scijava.org/ImageJ1/</link>
+									<link>https://javadoc.scijava.org/ImgLib2/</link>
+								</links>
+							</configuration>
+						</reportPlugin>
+						<reportPlugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+						</reportPlugin>
+					</reportPlugins>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<outputDirectory>E:\code\imagej\example-imagej-command\target\site</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<maxmemory>1024m</maxmemory>
+					<use>false</use>
+					<links>
+						<link>https://javadoc.scijava.org/Java/</link>
+						<link>https://javadoc.scijava.org/SciJava/</link>
+						<link>https://javadoc.scijava.org/ImageJ/</link>
+						<link>https://javadoc.scijava.org/ImageJ1/</link>
+					</links>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
 </project>
