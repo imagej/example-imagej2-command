@@ -18,11 +18,11 @@
 
 	<name>Gauss Filtering</name>
 	<description>A Maven project implementing an ImageJ command.</description>
-	<url>http://mycompany.com/imagej/gauss-filtering/</url>
+	<url>https://mycompany.com/imagej/gauss-filtering/</url>
 	<inceptionYear>2017</inceptionYear>
 	<organization>
 		<name>My Company</name>
-		<url>http://mycompany.com/</url>
+		<url>https://mycompany.com/</url>
 	</organization>
 	<licenses>
 		<license>
@@ -36,7 +36,7 @@
 		<developer>
 			<id>ctrueden</id>
 			<name>Curtis Rueden</name>
-			<url>http://imagej.net/User:Rueden</url>
+			<url>https://imagej.net/User:Rueden</url>
 			<roles>
 				<role>founder</role>
 				<role>lead</role>
@@ -51,7 +51,7 @@
 	<contributors>
 		<contributor>
 			<name>Yili Zhao</name>
-			<url>http://imagej.net/User:Panovr</url>
+			<url>https://imagej.net/User:Panovr</url>
 			<roles><role>founder</role></roles>
 			<properties><id>panovr</id></properties>
 		</contributor>
@@ -60,7 +60,7 @@
 	<mailingLists>
 		<mailingList>
 			<name>Image.sc Forum</name>
-			<archive>https://forum.image.sc/</archive>
+			<archive>https://forum.image.sc/tags/imagej</archive>
 		</mailingList>
 	</mailingLists>
 
@@ -88,7 +88,7 @@
 	<repositories>
 		<repository>
 			<id>imagej.public</id>
-			<url>http://maven.imagej.net/content/groups/public</url>
+			<url>https://maven.imagej.net/content/groups/public</url>
 		</repository>
 	</repositories>
 
