@@ -40,14 +40,12 @@ developments, it is in the public domain.
 How to use this project as a starting point
 ===========================================
 
-Either
+1. Visit [this link](https://github.com/imagej/example-imagej-command/generate)
+   to create a new repository in your space using this one as a template.
 
-* `git clone git://github.com/imagej/example-imagej-command`, or
-* unpack https://github.com/imagej/example-imagej-command/archive/master.zip
+2. [Clone your new repository](https://help.github.com/en/articles/cloning-a-repository).
 
-Then:
-
-1. Edit the `pom.xml` file. Every entry should be pretty self-explanatory.
+3. Edit the `pom.xml` file. Every entry should be pretty self-explanatory.
    In particular, change
     1. the *artifactId* (will be used for the JAR file name prefix)
     2. the *groupId*, ideally to a reverse domain name your organization owns
@@ -59,22 +57,16 @@ Then:
        [here](https://imagej.net/Maven#How_to_find_a_dependency.27s_groupId.2FartifactId.2Fversion_.28GAV.29.3F))
     5. the *developer* information
     6. the *scm* information
-2. Remove the `GaussFiltering.java` file and add your own `.java` files
+
+3. Remove the `GaussFiltering.java` file and add your own `.java` files
    to `src/main/java/<package>/` (if you need supporting files such as icons
    in the resulting `.jar` file, put them into `src/main/resources/`)
+
 4. Replace the contents of `README.md` with information about your project.
 
-If you cloned the `example-imagej-command` repository, you probably want to
-publish the result in your own repository:
-
-1. Call `git status` to verify .gitignore lists all the files (or file
-   patterns) that should be ignored
-2. Call `git add .` and `git add -u` to stage the current files for
-   commit
-3. Call `git commit` or `git gui` to commit the changes
-4. [Create a new GitHub repository](https://github.com/new)
-5. `git remote set-url origin git@github.com:<username>/<projectname>`
-6. `git push origin HEAD`
+5. Make your initial
+   [commit](https://help.github.com/en/desktop/contributing-to-projects/committing-and-reviewing-changes-to-your-project) and
+   [push the results](https://help.github.com/en/articles/pushing-commits-to-a-remote-repository)!
 
 ### Eclipse: To ensure that Maven copies the plugin to your ImageJ folder
 
@@ -84,5 +76,5 @@ publish the result in your own repository:
     - name: `scijava.app.directory`
     - value: `/path/to/ImageJ.app/`
 
-This ensures that the final `.jar` file will also be copied to your ImageJ
-plugins folder everytime you run the Maven Build
+This ensures that the final `.jar` file will also be copied to
+your ImageJ plugins folder everytime you run the Maven build.
