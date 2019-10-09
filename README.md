@@ -21,10 +21,10 @@ in the project root.
 However you build the project, in the end you will have the `.jar` file
 (called *artifact* in Maven speak) in the `target/` subdirectory.
 
-To copy the artifact into the correct place, you can call
-`mvn -Dimagej.app.directory=/path/to/ImageJ.app/`.
-This will not only copy your artifact, but also all the dependencies. Restart
-your ImageJ or call *Help>Refresh Menus* to see your plugin in the menus.
+To copy the artifact into the correct place, you can call  
+`mvn -Dscijava.app.directory="/path/to/ImageJ.app/"`    
+This will not only copy your artifact, but also all the dependencies.  
+Restart your ImageJ or call *Help>Refresh Menus* to see your plugin in the menus.  
 
 Developing plugins in an IDE is convenient, especially for debugging. To
 that end, the plugin contains a `main` method which sets the `plugins.dir`
@@ -80,7 +80,7 @@ publish the result in your own repository:
 1. Go to _Run Configurations..._
 2. Choose _Maven Build_
 3. Add the following parameter:
-    - name: `imagej.app.directory`
+    - name: `scijava.app.directory`
     - value: `/path/to/ImageJ.app/`
 
 This ensures that the final `.jar` file will also be copied to your ImageJ
