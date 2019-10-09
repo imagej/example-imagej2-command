@@ -22,7 +22,7 @@ However you build the project, in the end you will have the `.jar` file
 (called *artifact* in Maven speak) in the `target/` subdirectory.
 
 To copy the artifact into the correct place, you can call
-`mvn -Dscijava.app.directory="/path/to/ImageJ.app/"`
+`mvn -Dscijava.app.directory="/path/to/ImageJ.app/"`.
 This will not only copy your artifact, but also all the dependencies.
 Restart your ImageJ or call *Help &#8250; Refresh Menus* to see your
 plugin in the menus.
@@ -49,7 +49,7 @@ Then:
 
 1. Edit the `pom.xml` file. Every entry should be pretty self-explanatory.
    In particular, change
-    1. the *artifactId* (**NOTE**: should contain a '_' character)
+    1. the *artifactId* (will be used for the JAR file name prefix)
     2. the *groupId*, ideally to a reverse domain name your organization owns
     3. the *version* (note that you typically want to use a version number
        ending in *-SNAPSHOT* to mark it as a work in progress rather than a
@@ -60,8 +60,8 @@ Then:
     5. the *developer* information
     6. the *scm* information
 2. Remove the `GaussFiltering.java` file and add your own `.java` files
-   to `src/main/java/<package>/` (if you need supporting files -- like icons
-   -- in the resulting `.jar` file, put them into `src/main/resources/`)
+   to `src/main/java/<package>/` (if you need supporting files such as icons
+   in the resulting `.jar` file, put them into `src/main/resources/`)
 4. Replace the contents of `README.md` with information about your project.
 
 If you cloned the `example-imagej-command` repository, you probably want to
