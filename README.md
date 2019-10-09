@@ -5,10 +5,10 @@ in an IDE of your choice. You can even collaborate with developers using a
 different IDE than you.
 
 * In [Eclipse](http://eclipse.org), for example, it is as simple as
-  _File&gt;Import...&gt;Existing Maven Project_.
+  _File &#8250; Import... &#8250; Existing Maven Project_.
 
 * In [NetBeans](http://netbeans.org), it is even simpler:
-  _File&gt;Open Project_.
+  _File &#8250; Open Project_.
 
 * The same works in [IntelliJ](http://jetbrains.net).
 
@@ -21,10 +21,11 @@ in the project root.
 However you build the project, in the end you will have the `.jar` file
 (called *artifact* in Maven speak) in the `target/` subdirectory.
 
-To copy the artifact into the correct place, you can call  
-`mvn -Dscijava.app.directory="/path/to/ImageJ.app/"`    
-This will not only copy your artifact, but also all the dependencies.  
-Restart your ImageJ or call *Help>Refresh Menus* to see your plugin in the menus.  
+To copy the artifact into the correct place, you can call
+`mvn -Dscijava.app.directory="/path/to/ImageJ.app/"`
+This will not only copy your artifact, but also all the dependencies.
+Restart your ImageJ or call *Help &#8250; Refresh Menus* to see your
+plugin in the menus.
 
 Developing plugins in an IDE is convenient, especially for debugging. To
 that end, the plugin contains a `main` method which sets the `plugins.dir`
