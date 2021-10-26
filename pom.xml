@@ -12,20 +12,20 @@
 		<relativePath />
 	</parent>
 
-	<groupId>com.mycompany</groupId>
-	<artifactId>GaussFiltering</artifactId>
+	<groupId>com.mycompany</groupId>        <!-- FIXME: Your organization groupId here -->
+	<artifactId>GaussFiltering</artifactId> <!-- FIXME: Your project artifactId here   -->
 	<version>0.1.0-SNAPSHOT</version>
 
-	<name>Gauss Filtering</name>
-	<description>A Maven project implementing an ImageJ command.</description>
-	<url>https://mycompany.com/imagej/gauss-filtering/</url>
-	<inceptionYear>2017</inceptionYear>
+	<name>Gauss Filtering</name>                                               <!-- FIXME: Your project name here          -->
+	<description>A Maven project implementing an ImageJ command.</description> <!-- FIXME: Your project description here   -->
+	<url>https://mycompany.com/imagej/gauss-filtering/</url>                   <!-- FIXME: Your project website here       -->
+	<inceptionYear>2017</inceptionYear>                                        <!-- FIXME: Your project starting year here -->
 	<organization>
-		<name>My Company</name>
-		<url>https://mycompany.com/</url>
+		<name>My Company</name>           <!-- FIXME: Your organization name here    -->
+		<url>https://mycompany.com/</url> <!-- FIXME: Your organization website here -->
 	</organization>
 	<licenses>
-		<license>
+		<license>                         <!-- FIXME: Your license here -->
 			<name>CC0</name>
 			<url>https://creativecommons.org/publicdomain/zero/1.0/</url>
 			<distribution>repo</distribution>
@@ -35,9 +35,9 @@
 	<developers>
 		<!-- See https://imagej.net/Team -->
 		<developer>
-			<id>ctrueden</id>
-			<name>Curtis Rueden</name>
-			<url>https://imagej.net/User:Rueden</url>
+			<id>octocat</id>                                          <!-- FIXME: Your GitHub handle here -->
+			<name>Noma Onomatopoeia</name>                            <!-- FIXME: Your name here          -->
+			<url>https://mycompany.com/people/noma-onomatopoeia</url> <!-- FIXME: Your website here       -->
 			<roles>
 				<role>founder</role>
 				<role>lead</role>
@@ -51,10 +51,7 @@
 	</developers>
 	<contributors>
 		<contributor>
-			<name>Yili Zhao</name>
-			<url>https://imagej.net/User:Panovr</url>
-			<roles><role>founder</role></roles>
-			<properties><id>panovr</id></properties>
+			<name>None</name>
 		</contributor>
 	</contributors>
 
@@ -82,8 +79,8 @@
 	<properties>
 		<package-name>com.mycompany.imagej</package-name>
 		<main-class>com.mycompany.imagej.GaussFiltering</main-class>
-		<license.licenseName>unlicense</license.licenseName>
-		<license.copyrightOwners>My Company, Inc.</license.copyrightOwners>
+		<license.licenseName>cc0</license.licenseName>                      <!-- FIXME: Your license-maven-plugin license code here -->
+		<license.copyrightOwners>My Company, Inc.</license.copyrightOwners> <!-- FIXME: Your legal entity name here -->
 	</properties>
 
 	<repositories>
