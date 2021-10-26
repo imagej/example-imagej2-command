@@ -26,7 +26,8 @@
 	</organization>
 	<licenses>
 		<license>
-			<name>Simplified BSD License</name>
+			<name>CC0</name>
+			<url>https://creativecommons.org/publicdomain/zero/1.0/</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -81,7 +82,7 @@
 	<properties>
 		<package-name>com.mycompany.imagej</package-name>
 		<main-class>com.mycompany.imagej.GaussFiltering</main-class>
-		<license.licenseName>bsd_2</license.licenseName>
+		<license.licenseName>unlicense</license.licenseName>
 		<license.copyrightOwners>My Company, Inc.</license.copyrightOwners>
 	</properties>
 
