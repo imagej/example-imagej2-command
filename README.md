@@ -7,7 +7,8 @@ For an example Maven project implementing an **original ImageJ plugin**, see:
 
 It is intended as an ideal starting point to develop new ImageJ2 commands
 in an IDE of your choice. You can even collaborate with developers using a
-different IDE than you.
+different IDE than you. For a beginner's guide on how begin an ImageJ2 ("Fiji") plugin, see:
+https://imagej.net/develop/beginners-guide
 
 * In [Eclipse](http://eclipse.org), for example, it is as simple as
   _File &#8250; Import... &#8250; Existing Maven Project_.
